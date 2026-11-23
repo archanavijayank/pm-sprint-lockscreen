@@ -6,7 +6,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="theme-color" content="#F4F7FB" />
-  <title>PM Sprint OS — Summer 2027 Recruiting Tracker</title>
+  <title>PM Sprint OS — Summer 2027 Internship Tracker & Lock Screen</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -56,19 +56,19 @@
       min-height: 100vh;
       display: flex;
       justify-content: center;
-      padding: 16px 16px 96px;
+      padding: 16px 16px 104px;
       transition: background 0.25s ease, color 0.25s ease;
     }
 
     .app-container {
       width: 100%;
-      max-width: 540px;
+      max-width: 560px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 14px;
     }
 
-    /* Top App Header */
+    /* Header */
     .topbar {
       display: flex;
       justify-content: space-between;
@@ -77,35 +77,35 @@
       padding: 4px 2px;
     }
 
-    .glance-cluster {
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-    }
-
-    .live-date {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text-muted);
-    }
-
-    .countdown-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 8px;
+    .app-kicker {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      color: var(--blue);
+      text-transform: uppercase;
     }
 
     .days-hero {
       font-size: 24px;
       font-weight: 800;
       letter-spacing: -0.6px;
+      margin: 2px 0;
     }
 
-    .target-pill {
+    .target-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .pill-btn {
       background: var(--blue-soft);
       color: var(--blue);
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 800;
       padding: 4px 10px;
       border-radius: 999px;
@@ -137,34 +137,52 @@
       box-shadow: var(--shadow);
     }
 
-    /* Mode Banner */
-    .mode-banner {
-      background: var(--blue-soft);
-      color: var(--blue);
-      border-radius: 16px;
-      padding: 10px 14px;
-      font-size: 12.5px;
-      font-weight: 700;
+    /* Student Guide Card */
+    .guide-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 14px 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .guide-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 10px;
-    }
-
-    .mode-banner button {
-      background: var(--blue);
-      color: #FFFFFF;
-      border: none;
-      border-radius: 999px;
-      padding: 5px 12px;
-      font-family: inherit;
-      font-size: 11.5px;
-      font-weight: 700;
+      font-size: 12.5px;
+      font-weight: 800;
+      color: var(--blue);
       cursor: pointer;
-      flex-shrink: 0;
     }
 
-    body.dark .mode-banner button { color: #0D1015; }
+    .guide-steps {
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    @media (max-width: 500px) {
+      .guide-steps { grid-template-columns: 1fr; }
+    }
+
+    .guide-step {
+      background: var(--surface-tonal);
+      border-radius: 14px;
+      padding: 10px 12px;
+      font-size: 11.5px;
+      line-height: 1.4;
+    }
+
+    .guide-step strong {
+      display: block;
+      font-size: 12px;
+      margin-bottom: 2px;
+      color: var(--text);
+    }
+
+    .guide-step span { color: var(--text-muted); }
 
     /* Cards */
     .card {
@@ -223,6 +241,7 @@
       cursor: pointer;
       font-family: inherit;
       color: var(--text);
+      text-align: left;
       transition: all 0.2s ease;
     }
 
@@ -232,17 +251,11 @@
       box-shadow: 0 4px 12px rgba(26, 115, 232, 0.14);
     }
 
-    .track-tab-left {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 2px;
-    }
-
     .track-code {
       font-size: 10.5px;
       font-weight: 800;
       color: var(--text-muted);
+      display: block;
     }
 
     .track-name {
@@ -256,16 +269,13 @@
     }
 
     /* Active Focus Card */
-    .focus-card {
-      position: relative;
-      touch-action: pan-y;
-    }
+    .focus-card { touch-action: pan-y; }
 
     .focus-top {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .pace-badge {
@@ -273,13 +283,9 @@
       font-weight: 800;
       padding: 5px 11px;
       border-radius: 999px;
-      letter-spacing: 0.3px;
     }
 
-    .nav-arrows {
-      display: flex;
-      gap: 6px;
-    }
+    .nav-arrows { display: flex; gap: 6px; }
 
     .circle-btn {
       width: 32px;
@@ -293,17 +299,17 @@
     }
 
     .focus-headline {
-      font-size: 21px;
+      font-size: 20px;
       font-weight: 800;
       line-height: 1.25;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
 
-    .focus-meta {
-      font-size: 12.5px;
-      font-weight: 600;
+    .focus-why {
+      font-size: 13px;
       color: var(--text-muted);
-      margin-bottom: 18px;
+      line-height: 1.45;
+      margin-bottom: 14px;
     }
 
     .focus-controls {
@@ -311,6 +317,8 @@
       align-items: center;
       justify-content: space-between;
       gap: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
     }
 
     .progress-cluster {
@@ -319,16 +327,9 @@
       gap: 10px;
     }
 
-    .pct-big {
-      font-size: 18px;
-      font-weight: 800;
-    }
+    .pct-big { font-size: 18px; font-weight: 800; }
 
-    .rep-actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+    .rep-actions { display: flex; align-items: center; gap: 8px; }
 
     .btn-minus {
       width: 38px;
@@ -344,22 +345,21 @@
 
     .btn-primary {
       height: 40px;
-      padding: 0 18px;
+      padding: 0 16px;
       border-radius: 999px;
       border: none;
       background: var(--blue);
       color: #FFFFFF;
       font-family: inherit;
-      font-size: 13.5px;
+      font-size: 13px;
       font-weight: 700;
       cursor: pointer;
       box-shadow: 0 4px 14px rgba(26, 115, 232, 0.28);
     }
 
     body.dark .btn-primary { color: #0D1015; }
-    .btn-primary:active { transform: scale(0.96); }
 
-    /* Working Log / Mini-CRM */
+    /* Working Log */
     .log-header {
       display: flex;
       justify-content: space-between;
@@ -367,10 +367,7 @@
       margin-bottom: 12px;
     }
 
-    .log-header h3 {
-      font-size: 15px;
-      font-weight: 800;
-    }
+    .log-header h3 { font-size: 15px; font-weight: 800; }
 
     .quota-edit-btn {
       background: none;
@@ -401,11 +398,6 @@
       outline: none;
     }
 
-    .add-input:focus {
-      border-color: var(--blue);
-      background: var(--surface);
-    }
-
     .add-submit {
       height: 42px;
       padding: 0 16px;
@@ -419,11 +411,7 @@
       cursor: pointer;
     }
 
-    .entry-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
+    .entry-list { display: flex; flex-direction: column; gap: 8px; }
 
     .entry-item {
       display: flex;
@@ -458,40 +446,20 @@
       flex-shrink: 0;
     }
 
-    .entry-item.done .check-box {
-      background: var(--blue);
-    }
-
+    .entry-item.done .check-box { background: var(--blue); }
     body.dark .entry-item.done .check-box { color: #0D1015; }
+    .entry-item.done .entry-text { text-decoration: line-through; opacity: 0.55; }
+    .entry-date { font-size: 11px; color: var(--text-muted); font-weight: 600; }
+    .del-btn { background: none; border: none; color: var(--text-muted); font-size: 14px; cursor: pointer; padding: 4px; }
 
-    .entry-item.done .entry-text {
-      text-decoration: line-through;
-      opacity: 0.55;
-    }
-
-    .entry-date {
-      font-size: 11px;
-      color: var(--text-muted);
-      font-weight: 600;
-    }
-
-    .del-btn {
-      background: none;
-      border: none;
-      color: var(--text-muted);
-      font-size: 14px;
-      cursor: pointer;
-      padding: 4px;
-    }
-
-    /* Bottom Wallpaper Sync Bar */
+    /* Bottom Lock Screen Action Bar */
     .bottom-dock {
       position: fixed;
       bottom: 16px;
       left: 50%;
       transform: translateX(-50%);
       width: calc(100% - 32px);
-      max-width: 540px;
+      max-width: 560px;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 999px;
@@ -499,32 +467,62 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.16);
+      gap: 8px;
+      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.18);
       z-index: 50;
     }
 
-    .dock-text {
-      font-size: 12.5px;
-      font-weight: 700;
+    .dock-text { font-size: 12.5px; font-weight: 800; }
+    .dock-sub { font-size: 11px; color: var(--text-muted); display: block; }
+    .dock-btns { display: flex; gap: 6px; }
+
+    /* Lock Screen Preview Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 14, 22, 0.75);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 100;
     }
 
-    .dock-sub {
-      font-size: 11px;
-      color: var(--text-muted);
-      display: block;
+    .modal-backdrop.open { display: flex; }
+
+    .modal-box {
+      background: var(--surface);
+      border-radius: 28px;
+      padding: 20px;
+      max-width: 360px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.4);
+    }
+
+    .preview-img {
+      width: 100%;
+      max-height: 440px;
+      object-fit: contain;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      margin: 12px 0;
     }
   </style>
 </head>
 <body>
 
   <main class="app-container">
-    <!-- Live Header -->
+    <!-- Top Header -->
     <header class="topbar">
-      <div class="glance-cluster">
-        <span class="live-date" id="liveDateText">Loading date...</span>
-        <div class="countdown-row">
-          <span class="days-hero" id="daysLeftText">70 days left</span>
-          <button class="target-pill" id="targetDateBtn" onclick="editTargetDate()">Target: Jan 31, 2027 ✎</button>
+      <div>
+        <div class="app-kicker">Summer 2027 PM Internship Sprint</div>
+        <div class="days-hero" id="daysLeftText">70 days to Offer</div>
+        <div class="target-row">
+          <span id="liveDateText">Today</span>
+          <span>·</span>
+          <button class="pill-btn" id="targetDateBtn" onclick="editTargetDate()">Target: Jan 31, 2027 ✎</button>
         </div>
       </div>
       <div class="top-actions">
@@ -533,34 +531,50 @@
       </div>
     </header>
 
-    <!-- Helpful Onboarding Banner -->
-    <div class="mode-banner" id="modeBanner">
-      <span id="bannerText">✦ Viewing prefilled sample sprint — edit anything or start from zero.</span>
-      <button id="bannerActionBtn" onclick="toggleDataMode()">Start Fresh (0)</button>
-    </div>
+    <!-- Plain-English How It Works Guide -->
+    <section class="guide-card">
+      <div class="guide-header" onclick="toggleGuide()">
+        <span>✦ How This Works on Your Phone (3 Steps)</span>
+        <span id="guideArrow">Hide ▴</span>
+      </div>
+      <div class="guide-steps" id="guideSteps">
+        <div class="guide-step">
+          <strong>1. Work 4 Parallel Tracks</strong>
+          <span>Tap any milestone below to log coffee chats, applications, or mock prep.</span>
+        </div>
+        <div class="guide-step">
+          <strong>2. Add to Home Screen</strong>
+          <span>Tap Share → "Add to Home Screen" on your phone so it opens like a native app.</span>
+        </div>
+        <div class="guide-step">
+          <strong>3. Sync Lock Screen PNG</strong>
+          <span>Tap "Preview / Download" below to set your live progress as your Lock Screen.</span>
+        </div>
+      </div>
+    </section>
 
     <!-- Parallel Master Horizon -->
     <section class="card">
       <div class="horizon-header">
-        <span>4 PARALLEL RECRUITING TRACKS</span>
+        <span>YOUR 4 RECRUITING MILESTONES</span>
         <span id="overallPctText">0% OVERALL</span>
       </div>
       <div class="segmented-bar" id="segmentedBar"></div>
       <div class="track-tabs" id="trackTabs"></div>
     </section>
 
-    <!-- Active Track Focus Card -->
+    <!-- Active Milestone Action Card -->
     <section class="card focus-card" id="focusCard">
       <div class="focus-top">
-        <span class="pace-badge" id="paceBadge">ON PACE</span>
+        <span class="pace-badge" id="paceBadge">ACTIVE MILESTONE</span>
         <div class="nav-arrows">
           <button class="circle-btn" onclick="switchTrack(-1)" aria-label="Previous">‹</button>
           <button class="circle-btn" onclick="switchTrack(1)" aria-label="Next">›</button>
         </div>
       </div>
 
-      <h2 class="focus-headline" id="focusHeadline">Track Title</h2>
-      <p class="focus-meta" id="focusMeta">Checkpoint · Pace Calculation</p>
+      <h2 class="focus-headline" id="focusHeadline">Milestone Title</h2>
+      <p class="focus-why" id="focusWhy">Why this milestone matters and what to do today.</p>
 
       <div class="focus-controls">
         <div class="progress-cluster">
@@ -576,17 +590,17 @@
         </div>
 
         <div class="rep-actions">
-          <button class="btn-minus" onclick="adjustCount(-1)" title="Decrease count">−</button>
-          <button class="btn-primary" id="logRepBtn" onclick="adjustCount(1)">+1 Log Rep</button>
+          <button class="btn-minus" onclick="adjustCount(-1)" title="Decrease">−</button>
+          <button class="btn-primary" id="logRepBtn" onclick="adjustCount(1)">+1 Completed</button>
         </div>
       </div>
     </section>
 
-    <!-- Real Interactive Log / Mini-CRM for Active Track -->
+    <!-- Interactive Checklist / Mini-CRM -->
     <section class="card">
       <div class="log-header">
-        <h3 id="logSectionTitle">M2 Coffee Chats Log</h3>
-        <button class="quota-edit-btn" onclick="editTrackTarget()">Edit Goal Target ✎</button>
+        <h3 id="logSectionTitle">Checklist & Log</h3>
+        <button class="quota-edit-btn" onclick="editTrackTarget()">Change Goal Number ✎</button>
       </div>
 
       <form class="add-form" onsubmit="addEntry(event)">
@@ -598,19 +612,38 @@
     </section>
   </main>
 
-  <!-- Floating Lock Screen Sync Bar -->
+  <!-- Floating Lock Screen Bar -->
   <div class="bottom-dock">
     <div>
-      <span class="dock-text">Lock Screen Wallpaper</span>
-      <span class="dock-sub">Exports live 9:16 PNG with your current stats</span>
+      <span class="dock-text">Your Lock Screen Widget</span>
+      <span class="dock-sub">Updates wallpaper with your real stats</span>
     </div>
-    <button class="btn-primary" onclick="exportLockScreenPNG()">⬇ Sync PNG</button>
+    <div class="dock-btns">
+      <button class="icon-btn" onclick="openLockPreview()">👁 Preview</button>
+      <button class="btn-primary" onclick="downloadLockScreen()">⬇ Save PNG</button>
+    </div>
+  </div>
+
+  <!-- Lock Screen Preview Modal -->
+  <div class="modal-backdrop" id="previewModal" onclick="closeLockPreview()">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <strong style="font-size:16px;">Your Live 9:16 Lock Screen</strong>
+      <p style="font-size:12px;color:var(--text-muted);margin-top:4px;">
+        Top 34% stays clear for your phone clock. Save this image and set it as your Lock Screen wallpaper.
+      </p>
+      <img id="previewImg" class="preview-img" alt="Lock screen preview" />
+      <div style="display:flex;gap:8px;justify-content:center;">
+        <button class="icon-btn" onclick="closeLockPreview()">Close</button>
+        <button class="btn-primary" onclick="downloadLockScreen()">⬇ Download Wallpaper PNG</button>
+      </div>
+    </div>
   </div>
 
   <canvas id="wallpaperCanvas" style="display:none;"></canvas>
 
   <script>
-    const STORAGE_KEY = 'pm_sprint_os_v3';
+    const STORAGE_KEY = 'pm_sprint_os_v4';
+    let guideOpen = true;
 
     function buildSampleState(darkMode = false) {
       return {
@@ -622,65 +655,69 @@
           {
             id: 'M1',
             short: 'Portfolio',
-            title: 'Portfolio & Resume Live',
+            title: 'Milestone 1: Portfolio & Resume Live',
+            why: 'Goal: Have 2 quantified PM case studies and a 1-page PM resume live before referrals go out (Checkpoint: Dec 10).',
             checkpoint: '2026-12-10',
             checkpointLabel: 'Dec 10',
             done: 4,
             target: 4,
             color: '#1E8E3E',
             soft: 'var(--green-soft)',
-            placeholder: 'e.g., Quantify search latency metric on Case Study 2...',
+            placeholder: 'Add a resume or portfolio task...',
             entries: [
-              { id: 1, text: 'Ship personal PM portfolio site on custom domain', completed: true, date: 'Nov 18' },
-              { id: 2, text: 'Rewrite 3 resume bullets with measurable retention impact', completed: true, date: 'Nov 20' }
+              { id: 1, text: 'Publish personal PM portfolio website', completed: true, date: 'Nov 18' },
+              { id: 2, text: 'Quantify impact metrics on all 3 resume bullets', completed: true, date: 'Nov 20' }
             ]
           },
           {
             id: 'M2',
-            short: 'Chats',
-            title: '15 PM Coffee Chats Complete',
+            short: 'Coffee Chats',
+            title: 'Milestone 2: 15 PM Coffee Chats',
+            why: 'Goal: Talk to 15 current PMs/APMs to learn team pain points and earn internal referrals (Checkpoint: Dec 28).',
             checkpoint: '2026-12-28',
             checkpointLabel: 'Dec 28',
             done: 8,
             target: 15,
             color: '#1A73E8',
             soft: 'var(--blue-soft)',
-            placeholder: 'e.g., Sarah Chen (Google APM Alum) — sent LinkedIn note...',
+            placeholder: 'e.g., Sarah Chen (Google APM) — sent LinkedIn message...',
             entries: [
-              { id: 101, text: 'Chat with Alex R. (Google Core Search PM)', completed: true, date: 'Nov 19' },
-              { id: 102, text: 'Follow up with Priya M. (YouTube Product) for referral', completed: false, date: 'Today' }
+              { id: 101, text: '1:1 chat with Alex R. (Google Search PM)', completed: true, date: 'Nov 19' },
+              { id: 102, text: 'Follow up with Priya M. (YouTube PM) for referral link', completed: false, date: 'Today' }
             ]
           },
           {
             id: 'M3',
-            short: 'Apps',
-            title: '30 High-Conviction Apps Submitted',
+            short: 'Applications',
+            title: 'Milestone 3: 30 Tailored PM Apps',
+            why: 'Goal: Submit 30 high-conviction Summer 2027 PM/APM internship applications with tailored essays (Checkpoint: Jan 15).',
             checkpoint: '2027-01-15',
             checkpointLabel: 'Jan 15',
             done: 4,
             target: 30,
             color: '#E37400',
             soft: 'var(--yellow-soft)',
-            placeholder: 'e.g., Google Summer 2027 APM Internship (Submitted)...',
+            placeholder: 'e.g., Google Summer 2027 APM Intern — Submitted...',
             entries: [
-              { id: 201, text: 'Google — Associate Product Manager Intern (Summer 2027)', completed: true, date: 'Nov 21' },
-              { id: 202, text: 'Stripe — Product Management Intern (Drafting essay)', completed: false, date: 'In Progress' }
+              { id: 201, text: 'Google — Associate Product Manager Intern (Submitted)', completed: true, date: 'Nov 21' },
+              { id: 202, text: 'Stripe — PM Intern (Drafting product essay)', completed: false, date: 'In Progress' }
             ]
           },
           {
             id: 'M4',
-            short: 'Prep',
-            title: '10 Mock Loops & Offer Ready',
+            short: 'Interview Prep',
+            title: 'Milestone 4: 10 Mock Interview Loops',
+            why: 'Goal: Complete 10 timed Product Sense, Metrics/Execution, and Behavioral mock interviews (Target: Jan 31).',
             checkpoint: '2027-01-31',
             checkpointLabel: 'Jan 31',
             done: 2,
             target: 10,
             color: '#D93025',
             soft: 'var(--red-soft)',
-            placeholder: 'e.g., Product Sense drill: Design Maps for visually impaired...',
+            placeholder: 'e.g., Product Sense mock: Design Maps for blind users...',
             entries: [
-              { id: 301, text: 'Product Sense mock #1 — Metrics & trade-offs review', completed: true, date: 'Nov 20' },
-              { id: 302, text: 'Execution drill: Diagnose 15% drop in Gmail open rate', completed: false, date: 'Scheduled' }
+              { id: 301, text: 'Product Sense mock #1 — User segmentation & trade-offs', completed: true, date: 'Nov 20' },
+              { id: 302, text: 'Execution drill: Diagnose 15% drop in Gmail open rate', completed: false, date: 'Next' }
             ]
           }
         ]
@@ -691,10 +728,7 @@
       const fresh = buildSampleState(darkMode);
       fresh.isSample = false;
       fresh.activeIndex = 0;
-      fresh.tracks.forEach(t => {
-        t.done = 0;
-        t.entries = [];
-      });
+      fresh.tracks.forEach(t => { t.done = 0; t.entries = []; });
       return fresh;
     }
 
@@ -709,16 +743,16 @@
       }
     }
 
-    function saveState() {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    function saveState() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+
+    function toggleGuide() {
+      guideOpen = !guideOpen;
+      document.getElementById('guideSteps').style.display = guideOpen ? 'grid' : 'none';
+      document.getElementById('guideArrow').textContent = guideOpen ? 'Hide ▴' : 'Show ▾';
     }
 
     function toggleDataMode() {
-      if (state.isSample) {
-        state = buildFreshState(state.darkMode);
-      } else {
-        state = buildSampleState(state.darkMode);
-      }
+      state = state.isSample ? buildFreshState(state.darkMode) : buildSampleState(state.darkMode);
       saveState();
       render();
     }
@@ -728,31 +762,21 @@
       const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
       const [y, m, d] = dateStr.split('-').map(Number);
       const target = new Date(y, m - 1, d);
-      const diff = Math.ceil((target - today) / (1000 * 60 * 60 * 24));
-      return Math.max(0, diff);
+      return Math.max(0, Math.ceil((target - today) / (1000 * 60 * 60 * 24)));
     }
 
     function render() {
       document.body.classList.toggle('dark', state.darkMode);
       document.getElementById('themeBtn').textContent = state.darkMode ? '☀️ Light' : '🌙 Dark';
+      document.getElementById('dataModeBtn').textContent = state.isSample ? '↺ Start Fresh (0)' : '✦ Load Sample';
 
-      // Update sample/fresh toggle UI
-      document.getElementById('dataModeBtn').textContent = state.isSample ? '↺ Fresh 0' : '✦ Sample';
-      document.getElementById('bannerText').textContent = state.isSample
-        ? '✦ Sample sprint loaded — edit anything or switch to a blank tracker.'
-        : '✓ Personal tracker active — all entries auto-save in your browser.';
-      document.getElementById('bannerActionBtn').textContent = state.isSample
-        ? 'Start Fresh (0)'
-        : 'Load Sample Data';
-
-      // Live real-world date & countdown
       const now = new Date();
       document.getElementById('liveDateText').textContent = now.toLocaleDateString('en-US', {
         weekday: 'short', month: 'short', day: 'numeric', year: 'numeric'
       });
 
       const daysLeft = daysUntil(state.targetDate);
-      document.getElementById('daysLeftText').textContent = `${daysLeft} days left`;
+      document.getElementById('daysLeftText').textContent = `${daysLeft} days to Offer`;
 
       const [ty, tm, td] = state.targetDate.split('-').map(Number);
       const formattedTarget = new Date(ty, tm - 1, td).toLocaleDateString('en-US', {
@@ -760,7 +784,6 @@
       });
       document.getElementById('targetDateBtn').textContent = `Target: ${formattedTarget} ✎`;
 
-      // Render Master Horizon
       const bar = document.getElementById('segmentedBar');
       const tabs = document.getElementById('trackTabs');
       bar.innerHTML = '';
@@ -781,8 +804,8 @@
         tab.className = `track-tab ${idx === state.activeIndex ? 'active' : ''}`;
         tab.onclick = () => { state.activeIndex = idx; saveState(); render(); };
         tab.innerHTML = `
-          <div class="track-tab-left">
-            <span class="track-code">${t.id} · ${t.checkpointLabel}</span>
+          <div>
+            <span class="track-code">${t.id} · Due ${t.checkpointLabel}</span>
             <span class="track-name">${t.short}</span>
           </div>
           <span class="track-stat" style="color:${t.color}">${t.done >= t.target ? '✓' : `${t.done}/${t.target}`}</span>
@@ -792,7 +815,6 @@
 
       document.getElementById('overallPctText').textContent = `${Math.round(sumPct / state.tracks.length)}% OVERALL`;
 
-      // Render Active Focus Card
       const cur = state.tracks[state.activeIndex];
       const curPct = Math.min(100, Math.round((cur.done / Math.max(1, cur.target)) * 100));
       const gateDays = Math.max(1, daysUntil(cur.checkpoint));
@@ -803,30 +825,26 @@
       badge.style.background = cur.soft;
       badge.style.color = cur.color;
       badge.textContent = remaining === 0
-        ? `✓ ${cur.id} GATE CLEARED`
-        : `${cur.id} ACTIVE · NEED ${pacePerWeek}/WK`;
+        ? `✓ ${cur.id} COMPLETED`
+        : `${cur.id} · NEED ${pacePerWeek}/WEEK (${gateDays}D LEFT)`;
 
       document.getElementById('focusHeadline').textContent = cur.title;
-      document.getElementById('focusMeta').textContent = remaining === 0
-        ? `Target reached ahead of ${cur.checkpointLabel} checkpoint`
-        : `${remaining} remaining before ${cur.checkpointLabel} (${gateDays}d left)`;
-
+      document.getElementById('focusWhy').textContent = cur.why;
       document.getElementById('focusPct').textContent = `${curPct}%`;
-      document.getElementById('focusFraction').textContent = `${cur.done} / ${cur.target}`;
+      document.getElementById('focusFraction').textContent = `${cur.done} of ${cur.target} done`;
 
       const ring = document.getElementById('ringCircle');
       ring.style.stroke = cur.color;
       ring.style.strokeDashoffset = 125.66 - (125.66 * curPct) / 100;
 
-      // Render Real Entries List
-      document.getElementById('logSectionTitle').textContent = `${cur.id} ${cur.short} Tracker (${cur.entries.length})`;
+      document.getElementById('logSectionTitle').textContent = `${cur.short} Checklist & Notes (${cur.entries.length})`;
       document.getElementById('entryInput').placeholder = cur.placeholder;
 
       const list = document.getElementById('entryList');
       list.innerHTML = '';
 
       if (cur.entries.length === 0) {
-        list.innerHTML = `<div style="font-size:13px;color:var(--text-muted);padding:8px 2px;">No items logged yet. Type your first real contact, application, or prep task above and hit Add.</div>`;
+        list.innerHTML = `<div style="font-size:13px;color:var(--text-muted);padding:6px 2px;">Nothing added yet. Add a person, company, or task above to track this milestone.</div>`;
       } else {
         cur.entries.forEach(item => {
           const row = document.createElement('div');
@@ -864,12 +882,7 @@
       if (!val) return;
       const cur = state.tracks[state.activeIndex];
       const todayLabel = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-      cur.entries.unshift({
-        id: Date.now(),
-        text: val,
-        completed: false,
-        date: todayLabel
-      });
+      cur.entries.unshift({ id: Date.now(), text: val, completed: false, date: todayLabel });
       input.value = '';
       saveState();
       render();
@@ -898,32 +911,19 @@
       render();
     }
 
-    function toggleTheme() {
-      state.darkMode = !state.darkMode;
-      saveState();
-      render();
-    }
+    function toggleTheme() { state.darkMode = !state.darkMode; saveState(); render(); }
 
     function editTargetDate() {
-      const next = prompt('Enter your target offer date (YYYY-MM-DD):', state.targetDate);
-      if (next && /^\d{4}-\d{2}-\d{2}$/.test(next)) {
-        state.targetDate = next;
-        saveState();
-        render();
-      }
+      const next = prompt('Enter your target internship offer date (YYYY-MM-DD):', state.targetDate);
+      if (next && /^\d{4}-\d{2}-\d{2}$/.test(next)) { state.targetDate = next; saveState(); render(); }
     }
 
     function editTrackTarget() {
       const cur = state.tracks[state.activeIndex];
-      const next = parseInt(prompt(`Set target quota for ${cur.short}:`, cur.target), 10);
-      if (!isNaN(next) && next > 0) {
-        cur.target = next;
-        saveState();
-        render();
-      }
+      const next = parseInt(prompt(`Set target goal number for ${cur.short}:`, cur.target), 10);
+      if (!isNaN(next) && next > 0) { cur.target = next; saveState(); render(); }
     }
 
-    // Touch swipe support on Focus Card
     let startX = 0;
     const focusCard = document.getElementById('focusCard');
     focusCard.addEventListener('touchstart', e => { startX = e.changedTouches[0].screenX; }, { passive: true });
@@ -933,7 +933,6 @@
       if (dx > 45) switchTrack(-1);
     }, { passive: true });
 
-    // Export real live stats as a clean 9:16 Lock Screen Wallpaper PNG
     function roundRect(ctx, x, y, w, h, r) {
       ctx.beginPath();
       ctx.moveTo(x + r, y);
@@ -944,7 +943,7 @@
       ctx.closePath();
     }
 
-    function exportLockScreenPNG() {
+    function renderWallpaperDataURL() {
       const canvas = document.getElementById('wallpaperCanvas');
       canvas.width = 1080;
       canvas.height = 1920;
@@ -954,7 +953,7 @@
       ctx.fillStyle = dark ? '#0D1015' : '#F4F7FB';
       ctx.fillRect(0, 0, 1080, 1920);
 
-      // Top 34% left clean for iOS/Android lock screen clock & widgets
+      // Clean top 34% for phone lock screen clock
       ctx.fillStyle = dark ? '#161B24' : '#FFFFFF';
       roundRect(ctx, 84, 720, 912, 360, 48);
       ctx.fill();
@@ -962,7 +961,7 @@
       const daysLeft = daysUntil(state.targetDate);
       ctx.fillStyle = dark ? '#94A3B8' : '#5F6775';
       ctx.font = '700 26px sans-serif';
-      ctx.fillText(`SUMMER 2027 PM SPRINT · ${daysLeft} DAYS LEFT`, 136, 790);
+      ctx.fillText(`SUMMER 2027 PM SPRINT · ${daysLeft} DAYS TO OFFER`, 136, 790);
 
       state.tracks.forEach((t, i) => {
         const bx = 136 + i * 204;
@@ -980,8 +979,8 @@
         roundRect(ctx, cx, cy, 392, 70, 22);
         ctx.fill();
         ctx.fillStyle = dark ? '#F1F5F9' : '#181C23';
-        ctx.font = '700 26px sans-serif';
-        ctx.fillText(`${t.id} ${t.short} · ${t.done}/${t.target}`, cx + 24, cy + 44);
+        ctx.font = '700 25px sans-serif';
+        ctx.fillText(`${t.id} ${t.short} · ${t.done}/${t.target}`, cx + 22, cy + 44);
       });
 
       const cur = state.tracks[state.activeIndex];
@@ -991,11 +990,11 @@
 
       ctx.fillStyle = dark ? '#8AB4F8' : '#1A73E8';
       ctx.font = '800 24px sans-serif';
-      ctx.fillText(`ACTIVE FOCUS · ${cur.id} (${cur.checkpointLabel.toUpperCase()})`, 136, 1196);
+      ctx.fillText(`CURRENT FOCUS · ${cur.id} (DUE ${cur.checkpointLabel.toUpperCase()})`, 136, 1196);
 
       ctx.fillStyle = dark ? '#F1F5F9' : '#181C23';
-      ctx.font = '800 46px sans-serif';
-      ctx.fillText(cur.title, 136, 1280);
+      ctx.font = '800 42px sans-serif';
+      ctx.fillText(cur.title.replace(/^Milestone \d:\s*/, ''), 136, 1280);
 
       const pct = Math.min(100, Math.round((cur.done / Math.max(1, cur.target)) * 100));
       ctx.fillStyle = dark ? '#94A3B8' : '#5F6775';
@@ -1006,12 +1005,26 @@
       if (nextTask) {
         ctx.fillStyle = dark ? '#8AB4F8' : '#1A73E8';
         ctx.font = '700 26px sans-serif';
-        ctx.fillText(`Next: ${nextTask.text.slice(0, 46)}`, 136, 1445);
+        ctx.fillText(`Next Action: ${nextTask.text.slice(0, 40)}`, 136, 1445);
       }
 
+      return canvas.toDataURL('image/png');
+    }
+
+    function openLockPreview() {
+      document.getElementById('previewImg').src = renderWallpaperDataURL();
+      document.getElementById('previewModal').classList.add('open');
+    }
+
+    function closeLockPreview() {
+      document.getElementById('previewModal').classList.remove('open');
+    }
+
+    function downloadLockScreen() {
+      const daysLeft = daysUntil(state.targetDate);
       const link = document.createElement('a');
       link.download = `PM_Sprint_LockScreen_${daysLeft}d.png`;
-      link.href = canvas.toDataURL('image/png');
+      link.href = renderWallpaperDataURL();
       link.click();
     }
 
