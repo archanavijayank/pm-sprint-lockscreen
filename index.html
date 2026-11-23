@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Summer 2027 PM Recruiting Sprint — Material 3 & Gemini Lock Screen</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-studio: #E9EEF6;
+      --phone-frame: #181A1F;
+      --surface-bg: #F8FAFC;
+      --surface-card: #FFFFFF;
+      --surface-tonal: #EEF3FA;
+      --text-primary: #1F1F1F;
+      --text-secondary: #5F6368;
+      --border-subtle: rgba(26, 115, 232, 0.14);
+      --google-blue: #1A73E8;
+      --google-blue-soft: #E8F0FE;
+      --google-green: #1E8E3E;
+      --google-green-soft: #E6F4EA;
+      --google-yellow: #F9AB00;
+      --google-yellow-soft: #FEF7E0;
+      --google-red: #D93025;
+      --google-red-soft: #FCE8E6;
+      --gemini-gradient: linear-gradient(135deg, #1A73E8 0%, #8E24AA 50%, #D93025 100%);
+      --shadow-card: 0 10px 28px rgba(15, 23, 42, 0.08);
+    }
+
+    body.dark {
+      --bg-studio: #0B0D12;
+      --surface-bg: #111318;
+      --surface-card: #1B1E26;
+      --surface-tonal: #1E2330;
+      --text-primary: #F1F5F9;
+      --text-secondary: #94A3B8;
+      --border-subtle: rgba(138, 180, 248, 0.18);
+      --google-blue: #8AB4F8;
+      --google-blue-soft: rgba(138, 180, 248, 0.16);
+      --google-green: #81C995;
+      --google-green-soft: rgba(129, 201, 149, 0.16);
+      --google-yellow: #FDD663;
+      --google-yellow-soft: rgba(253, 214, 99, 0.16);
+      --google-red: #F28B82;
+      --google-red-soft: rgba(242, 139, 130, 0.16);
+      --shadow-card: 0 12px 32px rgba(0, 0, 0, 0.45);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif;
+      background: var(--bg-studio);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: background 0.3s ease, color 0.3s ease;
+      padding: 20px 16px 48px;
+    }
+
+    /* Top Studio Nav */
+    .studio-nav {
+      width: 100%;
+      max-width: 960px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+      background: var(--surface-card);
+      padding: 12px 18px;
+      border-radius: 999px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .gemini-spark {
+      width: 24px;
+      height: 24px;
+      border-radius: 8px;
+      background: var(--gemini-gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 13px;
+    }
+
+    .tab-group {
+      display: flex;
+      background: var(--surface-tonal);
+      padding: 4px;
+      border-radius: 999px;
+      gap: 4px;
+    }
+
+    .tab-btn {
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 13px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn.active {
+      background: var(--surface-card);
+      color: var(--text-primary);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .theme-btn {
+      border: 1px solid var(--border-subtle);
+      background: var(--surface-tonal);
+      color: var(--text-primary);
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 12px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+
+    /* Main Layout */
+    .workspace {
+      width: 100%;
+      max-width: 960px;
+      display: grid;
+      grid-template-columns: 390px 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    @media (max-width: 840px) {
+      .workspace {
+        grid-template-columns: 1fr;
+        justify-items: center;
+      }
+    }
+
+    /* Phone Hardware Frame */
+    .phone-shell {
+      width: 375px;
+      height: 780px;
+      background: var(--phone-frame);
+      border-radius: 48px;
+      padding: 12px;
+      box-shadow: 0 28px 64px rgba(15, 23, 42, 0.28);
+      position: relative;
+    }
+
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      background: var(--surface-bg);
+      border-radius: 38px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20px 16px 18px;
+      transition: background 0.3s ease;
+    }
+
+    .phone-screen::before {
+      content: "";
+      position: absolute;
+      top: 42%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 280px;
+      height: 280px;
+      background: radial-gradient(circle, rgba(26, 115, 232, 0.14) 0%, rgba(142, 36, 170, 0.06) 50%, transparent 75%);
+      pointer-events: none;
+    }
+
+    .camera-pill {
+      width: 88px;
+      height: 22px;
+      background: #0F1115;
+      border-radius: 999px;
+      margin: 0 auto 14px;
+    }
+
+    /* At a Glance Clock */
+    .at-a-glance {
+      text-align: center;
+      margin-bottom: 14px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .glance-row {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+
+    .countdown-pill {
+      background: var(--google-blue-soft);
+      color: var(--google-blue);
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .clock-time {
+      font-size: 68px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -2.5px;
+      color: var(--text-primary);
+    }
+
+    /* Master Horizon Header */
+    .horizon-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 26px;
+      padding: 14px;
+      box-shadow: var(--shadow-card);
+      position: relative;
+      z-index: 2;
+      margin-bottom: 12px;
+    }
+
+    .horizon-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+    }
+
+    .horizon-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 4px;
+      height: 7px;
+      margin-bottom: 12px;
+    }
+
+    .bar-seg {
+      border-radius: 999px;
+      background: var(--surface-tonal);
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      transition: width 0.35s ease;
+    }
+
+    .track-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px;
+    }
+
+    .track-chip {
+      border: 1.5px solid transparent;
+      background: var(--surface-tonal);
+      border-radius: 14px;
+      padding: 7px 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .track-chip.active {
+      background: var(--surface-card);
+      border-color: var(--google-blue);
+      box-shadow: 0 3px 10px rgba(26, 115, 232, 0.14);
+    }
+
+    /* Swipeable Execution Card */
+    .deck-viewport {
+      position: relative;
+      z-index: 2;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .hero-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 28px;
+      padding: 18px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 238px;
+      touch-action: pan-y;
+      user-select: none;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+
+    .card-badge-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .pace-pill {
+      font-size: 10.5px;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--google-blue-soft);
+      color: var(--google-blue);
+    }
+
+    .swipe-arrows {
+      display: flex;
+      gap: 4px;
+    }
+
+    .arrow-btn {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      background: var(--surface-tonal);
+      color: var(--text-primary);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .task-title {
+      font-size: 20px;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 6px;
+      color: var(--text-primary);
+    }
+
+    .task-sub {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .ring-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ring-label {
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 6px;
+    }
+
+    .btn-workspace {
+      border: 1px solid var(--border-subtle);
+      background: var(--surface-tonal);
+      color: var(--text-primary);
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 12px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+
+    .btn-log {
+      border: none;
+      background: var(--google-blue);
+      color: #FFFFFF;
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 12.5px;
+      padding: 10px 15px;
+      border-radius: 999px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(26, 115, 232, 0.3);
+      transition: transform 0.12s ease;
+    }
+
+    body.dark .btn-log { color: #0B0D12; }
+    .btn-log:active { transform: scale(0.95); }
+
+    .dots-row {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 12px;
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--text-secondary);
+      opacity: 0.3;
+      transition: all 0.2s ease;
+    }
+
+    .dot.active {
+      width: 18px;
+      opacity: 1;
+      background: var(--google-blue);
+    }
+
+    /* In-Phone Drawer */
+    .drawer {
+      position: absolute;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.55);
+      backdrop-filter: blur(4px);
+      z-index: 20;
+      display: none;
+      align-items: flex-end;
+    }
+
+    .drawer.open { display: flex; }
+
+    .drawer-sheet {
+      width: 100%;
+      background: var(--surface-card);
+      border-radius: 28px 28px 36px 36px;
+      padding: 20px;
+      box-shadow: 0 -10px 30px rgba(0,0,0,0.2);
+    }
+
+    .drawer-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      background: var(--surface-tonal);
+      border-radius: 16px;
+      margin-top: 8px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    /* Right Panel: Controls & User Journey */
+    .side-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .panel-card {
+      background: var(--surface-card);
+      border-radius: 28px;
+      padding: 24px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .panel-card h2 {
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .panel-card p {
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .export-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    @media (max-width: 520px) { .export-grid { grid-template-columns: 1fr; } }
+
+    .export-btn {
+      border: 1px solid var(--border-subtle);
+      background: var(--surface-tonal);
+      color: var(--text-primary);
+      padding: 14px 16px;
+      border-radius: 18px;
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s ease;
+    }
+
+    .export-btn.primary {
+      background: var(--google-blue);
+      color: #FFFFFF;
+      border: none;
+    }
+
+    body.dark .export-btn.primary { color: #0B0D12; }
+
+    .journey-step {
+      display: flex;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .journey-step:last-child { border-bottom: none; }
+
+    .step-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background: var(--google-blue-soft);
+      color: var(--google-blue);
+      font-weight: 800;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .step-body h4 { font-size: 14px; font-weight: 700; margin-bottom: 3px; }
+    .step-body span { font-size: 13px; color: var(--text-secondary); line-height: 1.45; display: block; }
+  </style>
+</head>
+<body>
+
+  <nav class="studio-nav">
+    <div class="brand">
+      <div class="gemini-spark">✦</div>
+      <span>Summer 2027 PM Sprint · Material 3 Lock Screen</span>
+    </div>
+    <div class="tab-group">
+      <button class="tab-btn active" onclick="setTab('app', this)">Interactive Prototype</button>
+      <button class="tab-btn" onclick="setTab('journey', this)">Student UX Journey</button>
+    </div>
+    <button class="theme-btn" id="themeToggle" onclick="toggleTheme()">🌙 Obsidian Night</button>
+  </nav>
+
+  <main class="workspace">
+    <!-- Left: Interactive Phone Lock Screen -->
+    <section class="phone-shell">
+      <div class="phone-screen" id="phoneScreen">
+        <div>
+          <div class="camera-pill"></div>
+          <div class="at-a-glance">
+            <div class="glance-row">
+              <span>Sun, Nov 22</span>
+              <span class="countdown-pill" id="daysBadge">✦ 70d to Jan 31</span>
+            </div>
+            <div class="clock-time" id="clockText">9:41</div>
+          </div>
+
+          <!-- Master Parallel Horizon Header -->
+          <div class="horizon-card">
+            <div class="horizon-top">
+              <span>SUMMER 2027 · JAN 31, 2027</span>
+              <span id="overallPct">44% OVERALL</span>
+            </div>
+            <div class="horizon-bar" id="horizonBar"></div>
+            <div class="track-grid" id="trackGrid"></div>
+          </div>
+        </div>
+
+        <!-- Swipeable Daily Execution Deck -->
+        <div class="deck-viewport">
+          <div class="hero-card" id="heroCard">
+            <div>
+              <div class="card-badge-row">
+                <span class="pace-pill" id="paceBadge">ON PACE · M2 COFFEE CHATS</span>
+                <div class="swipe-arrows">
+                  <button class="arrow-btn" onclick="prevTrack()" aria-label="Previous track">‹</button>
+                  <button class="arrow-btn" onclick="nextTrack()" aria-label="Next track">›</button>
+                </div>
+              </div>
+              <div class="task-title" id="taskTitle">Reach out to 2 Google PM alumni today</div>
+              <div class="task-sub" id="taskSub">DEC 28 CHECKPOINT · 8 OF 15 LOGGED</div>
+            </div>
+
+            <div class="card-footer">
+              <div class="ring-wrap">
+                <svg width="44" height="44" viewBox="0 0 44 44">
+                  <circle cx="22" cy="22" r="18" fill="none" stroke="rgba(128,128,128,0.2)" stroke-width="4.5" />
+                  <circle id="progressArc" cx="22" cy="22" r="18" fill="none" stroke="#1A73E8" stroke-width="4.5"
+                    stroke-linecap="round" stroke-dasharray="113.1" stroke-dashoffset="53" transform="rotate(-90 22 22)" />
+                </svg>
+                <span class="ring-label" id="ringPct">53%</span>
+              </div>
+              <div class="cta-group">
+                <button class="btn-workspace" onclick="openDrawer()">Workspace ↗</button>
+                <button class="btn-log" id="logBtn" onclick="logRep()">+1 Log Rep</button>
+              </div>
+            </div>
+          </div>
+          <div class="dots-row" id="dotsRow"></div>
+        </div>
+
+        <!-- In-Phone Deep-Link Action Sheet -->
+        <div class="drawer" id="drawer" onclick="closeDrawer(event)">
+          <div class="drawer-sheet" onclick="event.stopPropagation()">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+              <strong id="drawerTitle" style="font-size:15px;">M2 Coffee Chats · Workspace</strong>
+              <button class="arrow-btn" onclick="closeDrawer()">✕</button>
+            </div>
+            <p style="font-size:12px;color:var(--text-secondary);margin-bottom:10px;">
+              Deep-linked directly from your lock screen for zero-friction daily execution:
+            </p>
+            <div id="drawerItems"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right: Export & UX Journey Panel -->
+    <section class="side-panel">
+      <div class="panel-card" id="appPanel">
+        <h2>Two-Layer Lock Screen System</h2>
+        <p>
+          Swipe between all <strong>4 parallel recruiting tracks</strong>, tap <strong>+1 Log Rep</strong> to advance real-time telemetry, and export high-resolution PNG assets ready for your phone or Handshake submission.
+        </p>
+        <div class="export-grid">
+          <button class="export-btn primary" onclick="downloadWallpaper()">
+            ⬇ Download 9:16 Wallpaper PNG<br>
+            <small style="opacity:0.85;font-weight:500;">1080×1920 · Top 34% Clock Clearance</small>
+          </button>
+          <button class="export-btn" onclick="downloadCover()">
+            ⬇ Download 3:2 Cover Showcase<br>
+            <small style="color:var(--text-secondary);font-weight:500;">1500×1000 · Dual-Theme Preview</small>
+          </button>
+        </div>
+      </div>
+
+      <div class="panel-card" id="journeyPanel">
+        <h2>End-to-End Student UX Journey</h2>
+        <div class="journey-step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h4>0.3s "At a Glance" Horizon Check</h4>
+            <span>Waking the phone shows the 70-day countdown to Jan 31, 2027 and all 4 parallel tracks without unlocking.</span>
+          </div>
+        </div>
+        <div class="journey-step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h4>Horizontal Swipe Across Parallel Tracks</h4>
+            <span>Instead of a dead waterfall list, swipe across Portfolio, Coffee Chats, Applications, and Prep whenever needed.</span>
+          </div>
+        </div>
+        <div class="journey-step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <h4>One-Tap Rep Logging (+1 Log Rep)</h4>
+            <span>Tapping +1 immediately increments your quota, updates pace status, and fills the 4-color Master Horizon bar.</span>
+          </div>
+        </div>
+        <div class="journey-step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <h4>Contextual Workspace Deep-Link</h4>
+            <span>Tapping Workspace ↗ jumps straight to your Alumni CRM, Application Queue, or Gemini Mock Interview coach.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <canvas id="exportCanvas" style="display:none;"></canvas>
+
+  <script>
+    const tracks = [
+      {
+        id: 'M1',
+        short: 'Portfolio',
+        name: 'M1 PORTFOLIO & RESUME',
+        checkpoint: 'DEC 10 CHECKPOINT',
+        title: 'Ship 2 quantified product case studies',
+        pace: 'COMPLETED · M1 PORTFOLIO',
+        done: 4,
+        total: 4,
+        color: '#1E8E3E',
+        cta: '+1 Polish',
+        links: ['Open Figma Case Study Deck', 'Run Gemini Resume Impact Audit', 'Verify Live Portfolio URL']
+      },
+      {
+        id: 'M2',
+        short: 'Chats',
+        name: 'M2 COFFEE CHATS',
+        checkpoint: 'DEC 28 CHECKPOINT',
+        title: 'Reach out to 2 Google PM alumni today',
+        pace: 'ON PACE · M2 COFFEE CHATS',
+        done: 8,
+        total: 15,
+        color: '#1A73E8',
+        cta: '+1 Log Rep',
+        links: ['LinkedIn Alumni Warm List (7 left)', 'Copy 3-Sentence Outreach Template', 'Log Coffee Chat Notes']
+      },
+      {
+        id: 'M3',
+        short: 'Apps',
+        name: 'M3 APPLICATIONS',
+        checkpoint: 'JAN 15 CHECKPOINT',
+        title: 'Submit 3 high-conviction APM/PM apps',
+        pace: 'ACTIVE · M3 APPLICATIONS',
+        done: 4,
+        total: 30,
+        color: '#F9AB00',
+        cta: '+1 Submit App',
+        links: ['Target Summer 2027 PM Tracker', 'Tailor Resume Keywords for Google APM', 'Request Referral Verification']
+      },
+      {
+        id: 'M4',
+        short: 'Prep',
+        name: 'M4 INTERVIEW PREP',
+        checkpoint: 'JAN 31 OFFER READY',
+        title: 'Complete 1 Product Sense mock loop',
+        pace: 'RAMPING · M4 INTERVIEW PREP',
+        done: 2,
+        total: 10,
+        color: '#D93025',
+        cta: '+1 Mock Loop',
+        links: ['Launch Gemini Product Sense Coach', 'Metrics & Execution Drill Bank', 'Behavioral STAR Story Matrix']
+      }
+    ];
+
+    let activeIdx = 1;
+    let touchStartX = 0;
+
+    function render() {
+      const bar = document.getElementById('horizonBar');
+      const grid = document.getElementById('trackGrid');
+      const dots = document.getElementById('dotsRow');
+      bar.innerHTML = '';
+      grid.innerHTML = '';
+      dots.innerHTML = '';
+
+      let totalRatio = 0;
+
+      tracks.forEach((t, idx) => {
+        const pct = Math.min(100, Math.round((t.done / t.total) * 100));
+        totalRatio += pct;
+
+        // Top 4-segment bar
+        const seg = document.createElement('div');
+        seg.className = 'bar-seg';
+        seg.innerHTML = `<div class="bar-fill" style="width:${pct}%;background:${t.color};"></div>`;
+        bar.appendChild(seg);
+
+        // Track chip
+        const chip = document.createElement('button');
+        chip.className = `track-chip ${idx === activeIdx ? 'active' : ''}`;
+        chip.onclick = () => { activeIdx = idx; render(); };
+        const statusText = t.done >= t.total ? '✓' : `${t.done}/${t.total}`;
+        chip.innerHTML = `<span>${t.id} ${t.short}</span><span style="color:${t.color}">${statusText}</span>`;
+        grid.appendChild(chip);
+
+        // Dots
+        const dot = document.createElement('div');
+        dot.className = `dot ${idx === activeIdx ? 'active' : ''}`;
+        dots.appendChild(dot);
+      });
+
+      document.getElementById('overallPct').textContent = `${Math.round(totalRatio / tracks.length)}% OVERALL`;
+
+      const cur = tracks[activeIdx];
+      const curPct = Math.min(100, Math.round((cur.done / cur.total) * 100));
+      document.getElementById('paceBadge').textContent = cur.pace;
+      document.getElementById('taskTitle').textContent = cur.title;
+      document.getElementById('taskSub').textContent = `${cur.checkpoint} · ${cur.done} OF ${cur.total} LOGGED`;
+      document.getElementById('ringPct').textContent = `${curPct}%`;
+      document.getElementById('logBtn').textContent = cur.cta;
+
+      const arc = document.getElementById('progressArc');
+      arc.style.stroke = cur.color;
+      arc.style.strokeDashoffset = 113.1 - (113.1 * curPct) / 100;
+    }
+
+    function logRep() {
+      const cur = tracks[activeIdx];
+      if (cur.done < cur.total) {
+        cur.done += 1;
+        if (cur.done === cur.total) cur.pace = `CLEARED · ${cur.name}`;
+      } else {
+        cur.done = 0;
+      }
+      render();
+    }
+
+    function nextTrack() { activeIdx = (activeIdx + 1) % tracks.length; render(); }
+    function prevTrack() { activeIdx = (activeIdx - 1 + tracks.length) % tracks.length; render(); }
+
+    const heroCard = document.getElementById('heroCard');
+    heroCard.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+    heroCard.addEventListener('touchend', e => {
+      const diff = e.changedTouches[0].screenX - touchStartX;
+      if (diff < -40) nextTrack();
+      if (diff > 40) prevTrack();
+    }, { passive: true });
+
+    function toggleTheme() {
+      const isDark = document.body.classList.toggle('dark');
+      document.getElementById('themeToggle').textContent = isDark ? '☀️ Pixel Day' : '🌙 Obsidian Night';
+    }
+
+    function setTab(tab, btn) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('journeyPanel').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function openDrawer() {
+      const cur = tracks[activeIdx];
+      document.getElementById('drawerTitle').textContent = `${cur.name} · Workspace`;
+      document.getElementById('drawerItems').innerHTML = cur.links
+        .map(link => `<div class="drawer-item"><span>${link}</span><span style="color:var(--google-blue)">Open →</span></div>`)
+        .join('');
+      document.getElementById('drawer').classList.add('open');
+    }
+
+    function closeDrawer() { document.getElementById('drawer').classList.remove('open'); }
+
+    function roundRect(ctx, x, y, w, h, r) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.arcTo(x + w, y, x + w, y + h, r);
+      ctx.arcTo(x + w, y + h, x, y + h, r);
+      ctx.arcTo(x, y + h, x, y, r);
+      ctx.arcTo(x, y, x + w, y, r);
+      ctx.closePath();
+    }
+
+    function downloadWallpaper() {
+      const canvas = document.getElementById('exportCanvas');
+      canvas.width = 1080;
+      canvas.height = 1920;
+      const ctx = canvas.getContext('2d');
+      const isDark = document.body.classList.contains('dark');
+
+      ctx.fillStyle = isDark ? '#111318' : '#F8FAFC';
+      ctx.fillRect(0, 0, 1080, 1920);
+
+      // Ambient Gemini glow
+      const grad = ctx.createRadialGradient(540, 1050, 40, 540, 1050, 520);
+      grad.addColorStop(0, isDark ? 'rgba(138,180,248,0.18)' : 'rgba(26,115,232,0.12)');
+      grad.addColorStop(1, 'transparent');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, 1080, 1920);
+
+      // Master Horizon Card (Starts below top 34% clock zone -> y = 740)
+      ctx.fillStyle = isDark ? '#1B1E26' : '#FFFFFF';
+      roundRect(ctx, 84, 740, 912, 340, 48);
+      ctx.fill();
+
+      ctx.fillStyle = isDark ? '#94A3B8' : '#5F6368';
+      ctx.font = '700 26px sans-serif';
+      ctx.fillText('SUMMER 2027 · JAN 31, 2027 · 70 DAYS LEFT', 136, 808);
+
+      tracks.forEach((t, i) => {
+        const bx = 136 + i * 204;
+        ctx.fillStyle = isDark ? '#2A303D' : '#E8EEF5';
+        roundRect(ctx, bx, 836, 192, 16, 8);
+        ctx.fill();
+        ctx.fillStyle = t.color;
+        roundRect(ctx, bx, 836, Math.max(24, 192 * (t.done / t.total)), 16, 8);
+        ctx.fill();
+
+        const cx = 136 + (i % 2) * 412;
+        const cy = 884 + Math.floor(i / 2) * 82;
+        ctx.fillStyle = isDark ? '#232834' : '#F1F5FB';
+        roundRect(ctx, cx, cy, 392, 66, 22);
+        ctx.fill();
+        ctx.fillStyle = isDark ? '#F1F5F9' : '#1F1F1F';
+        ctx.font = '700 26px sans-serif';
+        ctx.fillText(`${t.id} ${t.short} · ${t.done}/${t.total}`, cx + 24, cy + 42);
+      });
+
+      // Active Focus Card
+      const cur = tracks[activeIdx];
+      ctx.fillStyle = isDark ? '#1B1E26' : '#FFFFFF';
+      roundRect(ctx, 84, 1120, 912, 460, 52);
+      ctx.fill();
+
+      ctx.fillStyle = isDark ? 'rgba(138,180,248,0.18)' : '#E8F0FE';
+      roundRect(ctx, 136, 1172, 430, 48, 24);
+      ctx.fill();
+      ctx.fillStyle = isDark ? '#8AB4F8' : '#1A73E8';
+      ctx.font = '800 22px sans-serif';
+      ctx.fillText(cur.pace, 162, 1204);
+
+      ctx.fillStyle = isDark ? '#F1F5F9' : '#1F1F1F';
+      ctx.font = '800 46px sans-serif';
+      ctx.fillText(cur.title.slice(0, 32), 136, 1295);
+      if (cur.title.length > 32) ctx.fillText(cur.title.slice(32), 136, 1352);
+
+      ctx.fillStyle = isDark ? '#94A3B8' : '#5F6368';
+      ctx.font = '600 26px sans-serif';
+      ctx.fillText(`${cur.checkpoint} · ${cur.done} OF ${cur.total} LOGGED`, 136, 1418);
+
+      const pct = Math.round((cur.done / cur.total) * 100);
+      ctx.fillStyle = isDark ? '#8AB4F8' : '#1A73E8';
+      ctx.font = '800 42px sans-serif';
+      ctx.fillText(`${pct}% COMPLETE`, 136, 1515);
+
+      const link = document.createElement('a');
+      link.download = 'PM_Sprint_LockScreen_9x16.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+
+    function downloadCover() {
+      const canvas = document.getElementById('exportCanvas');
+      canvas.width = 1500;
+      canvas.height = 1000;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#E3E8F0';
+      ctx.fillRect(0, 0, 1500, 1000);
+
+      ctx.fillStyle = '#1F1F1F';
+      ctx.font = '800 44px sans-serif';
+      ctx.fillText('Summer 2027 PM Recruiting Sprint', 90, 110);
+      ctx.fillStyle = '#5F6368';
+      ctx.font = '600 24px sans-serif';
+      ctx.fillText('Material 3 Expressive & Gemini Two-Layer Lock Screen System · Target: Jan 31, 2027', 90, 155);
+
+      // Left Light Card & Right Dark Card Preview
+      [
+        { x: 90, bg: '#F8FAFC', card: '#FFFFFF', text: '#1F1F1F', sub: '#5F6368', label: 'PIXEL DAY (LIGHT)' },
+        { x: 780, bg: '#111318', card: '#1B1E26', text: '#F1F5F9', sub: '#94A3B8', label: 'OBSIDIAN GEMINI NIGHT' }
+      ].forEach(theme => {
+        ctx.fillStyle = theme.bg;
+        roundRect(ctx, theme.x, 210, 630, 710, 40);
+        ctx.fill();
+
+        ctx.fillStyle = theme.sub;
+        ctx.font = '700 20px sans-serif';
+        ctx.fillText(theme.label, theme.x + 40, 265);
+
+        ctx.fillStyle = theme.text;
+        ctx.font = '800 76px sans-serif';
+        ctx.fillText('9:41', theme.x + 40, 355);
+
+        ctx.fillStyle = theme.card;
+        roundRect(ctx, theme.x + 36, 400, 558, 200, 28);
+        ctx.fill();
+        ctx.fillStyle = theme.text;
+        ctx.font = '700 22px sans-serif';
+        ctx.fillText('M1 Portfolio ✓   ·   M2 Chats 8/15', theme.x + 64, 465);
+        ctx.fillText('M3 Apps 4/30     ·   M4 Prep 2/10', theme.x + 64, 520);
+
+        ctx.fillStyle = theme.card;
+        roundRect(ctx, theme.x + 36, 624, 558, 250, 28);
+        ctx.fill();
+        ctx.fillStyle = '#1A73E8';
+        ctx.font = '800 20px sans-serif';
+        ctx.fillText('ON PACE · M2 COFFEE CHATS', theme.x + 64, 678);
+        ctx.fillStyle = theme.text;
+        ctx.font = '800 30px sans-serif';
+        ctx.fillText('Reach out to 2 Google PM alumni', theme.x + 64, 732);
+        ctx.fillStyle = theme.sub;
+        ctx.font = '600 22px sans-serif';
+        ctx.fillText('53% Complete · +1 Log Rep Ready', theme.x + 64, 795);
+      });
+
+      const link = document.createElement('a');
+      link.download = 'Handshake_Cover_Showcase_3x2.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+
+    render();
+  </script>
+</body>
+</html>
